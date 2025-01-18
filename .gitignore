@@ -390,3 +390,10 @@ cython_debug/
 
 # PyPI configuration file
 .pypirc
+
+# Игнорирование папки Allure
+allure-files/
+allure-report/
+
+# Игнорирование папки .idea
+.idea/

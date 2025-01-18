@@ -12,7 +12,6 @@
 - [Генератор файла .gitignore](https://www.toptal.com/developers/gitignore)
 
 ###  Структура проекта
-- **allure_results**: директория для хранения файлов отчетов по тесту
 - **page**: 
    - `api_page.py`: код для взаимодействия с API сайта
    - `main_page.py`: код для взаимодействия с  основной страницей сайта
@@ -36,9 +35,9 @@ https://kate-alex.yonote.ru/doc/kursovaya-rabota-3-UlKN4by0ZZ
 3. Получить токен и прописать его в файле `config.py`
 3. Запустить тесты:
 ```python
-pytest --alluredir=allure_results # запуск сразу всех тестов;
-pytest tests/test_api.py --alluredir=allure-results # запуск Api тестов;
-pytest tests/test_ui.py --alluredir=allure-results # запуск Ui тестов.
+pytest --alluredir=allure-files # запуск сразу всех тестов;
+pytest tests/test_api.py --alluredir=allure-files # запуск Api тестов;
+pytest tests/test_ui.py --alluredir=allure-files # запуск Ui тестов.
 ```
-4. Сгенерировать отчет  `allure generate allure-files -o allure-report`
+4. Сгенерировать отчет  `allure generate allure-files --clean -o allure-report`
 5. Открыть отчет `allure open allure-report`

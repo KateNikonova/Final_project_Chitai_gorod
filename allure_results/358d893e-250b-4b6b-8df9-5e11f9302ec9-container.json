@@ -1,1 +1,0 @@
-{"uuid": "95e77128-3421-4d03-8484-280ef70f07a7", "children": ["99aca05f-407e-46e6-b315-54dd369464ac"], "befores": [{"name": "main_page", "status": "passed", "steps": [{"name": "Закрываем окно выбора города", "status": "passed", "start": 1737190728167, "stop": 1737190728492}], "start": 1737190692279, "stop": 1737190728492}], "start": 1737190692279, "stop": 1737190788840}
