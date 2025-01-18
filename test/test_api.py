@@ -1,46 +1,62 @@
 import allure
 import pytest
 from page.api_page import ApiPage
-from config import API_URL, API_TOKEN
+from config import API_URL
 
-api = ApiPage(API_URL, API_TOKEN)
+api = ApiPage(API_URL)
+
 
 # поиск по названию книги
-@allure.story("API")
 @allure.feature("Поиск")
+@allure.story("API")
+@allure.title("Поиск книги по названию на кириллице: {search_phrase}")
 @pytest.mark.api_positive
 @pytest.mark.parametrize("search_phrase", [
     ("Мастер и Маргарита"),
     ("Нос"),
     ("1984"),
-    ("Рисунок для начинающих")
+    ("рисунок для начинающих")
 ])
-@allure.title("Поиск книги по названию на кириллице: {search_phrase}")
-def test_search_positive(search_phrase):
-    resp_search = api.search_book(search_phrase)
-    assert resp_search.status_code == 200
-    assert search_phrase in resp_search.text
+def test_search_by_title_in_russian(search_phrase):
+    with allure.step(f"Отправка запроса на поиск книги с названием:"
+                     f" {search_phrase}"):
+        resp_search = api.search_book(search_phrase)
+
+    with allure.step("Статус код = 200"):
+        assert resp_search.status_code == 200
+
+    with allure.step(f"Название '{search_phrase}'"
+                     f" содержится в теле ответе"):
+        assert search_phrase in resp_search.text
+
 
 # поиск по названию на латинице
-@allure.story("API")
 @allure.feature("Поиск")
+@allure.story("API")
+@allure.title("Поиск книги по названию на кириллице: {search_phrase}")
 @pytest.mark.api_positive
 @pytest.mark.parametrize("search_phrase", [
     ("The ABC Murders"),
     ("Nineteen Eighty-Four"),
     ("Python")
 ])
-@allure.title("Поиск книги по названию на кириллице: {search_phrase}")
 def test_search_by_title_in_english(search_phrase):
-    resp_search = api.search_book(search_phrase)
-    assert resp_search.status_code == 200
-    assert search_phrase in resp_search.text
+    with allure.step(f"Отправка запроса на поиск книги с названием: "
+                     f"{search_phrase}"):
+        resp_search = api.search_book(search_phrase)
 
+    with allure.step("Статус код = 200"):
+        assert resp_search.status_code == 200
+
+    with allure.step(f"Название '{search_phrase}'"
+                     f" содержится в теле ответе"):
+        assert search_phrase in resp_search.text
 
 
 # поиск книг по автору на кириллице
-@allure.story("API")
 @allure.feature("Поиск")
+@allure.story("API")
+@allure.title("Поиск книги по названию на кириллице: {search_phrase}")
 @pytest.mark.api_positive
 @pytest.mark.parametrize("search_phrase", [
     ("Гоголь"),
@@ -49,36 +65,54 @@ def test_search_by_title_in_english(search_phrase):
     ("Тютчев"),
     ("Мамин-Сибиряк")
 ])
-def test_search_positive(search_phrase):
-    allure.dynamic.title(f"Поиск книги по автору на кириллице: {search_phrase}")
-    resp_search = api.search_book(search_phrase)
-    assert resp_search.status_code == 200
-    assert search_phrase in resp_search.text
+def test_search_by_author_in_russian(search_phrase):
+    with allure.step(f"Отправка запроса на поиск книг по автору:"
+                     f" {search_phrase}"):
+        resp_search = api.search_book(search_phrase)
+
+    with allure.step("Статус код"):
+        assert resp_search.status_code == 200
+
+    with allure.step(f"Имя автора '{search_phrase}'"
+                     f" содержится в теле ответа"):
+        assert search_phrase in resp_search.text
 
 
 # поиск по автору на латинице
-@allure.story("API")
 @allure.feature("Поиск")
+@allure.story("API")
+@allure.title("Поиск книги по автору на латинице: {search_phrase}")
 @pytest.mark.api_positive
 @pytest.mark.parametrize("search_phrase", [
     ("Kant"),
     ("Orwell G."),
     ("Agatha Christie")
 ])
-@allure.title("Поиск книги по автору на латинице: {search_phrase}")
 def test_search_by_author_in_english(search_phrase):
-    resp_search = api.search_book(search_phrase)
-    assert resp_search.status_code == 200
-    assert search_phrase in resp_search.text
+    with allure.step(f"Отправка запроса на поиск книг по автору:"
+                     f" {search_phrase}"):
+        resp_search = api.search_book(search_phrase)
+
+    with allure.step("Статус код = 200"):
+        assert resp_search.status_code == 200
+
+    with allure.step(f"Имя автора '{search_phrase}'"
+                     f" содержится в теле ответе"):
+        assert search_phrase in resp_search.text
 
 
 # поиск с пустым запросом
-@allure.story("API")
 @allure.feature("Поиск")
-@pytest.mark.api_positive
+@allure.story("API")
 @allure.title("Поиск с пустым запросом")
 @pytest.mark.api_positive
+@pytest.mark.api_positive
 def test_search_by_empty_string():
-    resp_search = api.search_book("")
-    assert resp_search.status_code == 400
-    assert "Phrase обязательное поле" in resp_search.text
+    with allure.step("Отправка запроса на поиск книг с пустой строкой"):
+        resp_search = api.search_book("")
+
+    with allure.step("Статус код = 200"):
+        assert resp_search.status_code == 400
+
+    with allure.step("Сообщение об ошибке содержится в теле ответа"):
+        assert "Phrase обязательное поле" in resp_search.text

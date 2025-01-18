@@ -36,8 +36,8 @@ https://kate-alex.yonote.ru/doc/kursovaya-rabota-3-UlKN4by0ZZ
 3. Запустить тесты:
 ```python
 pytest --alluredir=allure-files # запуск сразу всех тестов;
-pytest tests/test_api.py --alluredir=allure-files # запуск Api тестов;
-pytest tests/test_ui.py --alluredir=allure-files # запуск Ui тестов.
+pytest test/test_api.py --alluredir=allure-files # запуск Api тестов;
+pytest test/test_ui.py --alluredir=allure-files # запуск Ui тестов.
 ```
 4. Сгенерировать отчет  `allure generate allure-files --clean -o allure-report`
 5. Открыть отчет `allure open allure-report`
