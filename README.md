@@ -1,7 +1,4 @@
-# Final_project_Chitai_gorod
-
-
-## Шаблон для автоматизации тестирования на python
+## Дипломный проект автоматизации тестирования на python
 
 ### Стек:
 - pytest
@@ -10,33 +7,38 @@
 - allure
 - config
 
-
 ### Полезные ссылки
 - [Подсказка по markdown](https://www.markdownguide.org/basic-syntax/)
-- [Генератор файла .gitignore] (https://www.toptal.com/developers/gitignore)
+- [Генератор файла .gitignore](https://www.toptal.com/developers/gitignore)
 
-### шаги по работе с проектом
-- как получить токен для проекта
-- как склонировать проект(гит клон)
-- установить зависимости
-- запуск тестов: 
-pytest --alluredir=allure_results - запуск сразу всех тестов;
-pytest tests/test_api.py --alluredir=allure-results - запуск Api тестов;
-pytest tests/test_ui.py --alluredir=allure-results - запуск Ui тестов.
+###  Структура проекта
+- **allure_results**: директория для хранения файлов отчетов по тесту
+- **page**: 
+   - `api_page.py`: код для взаимодействия с API сайта
+   - `main_page.py`: код для взаимодействия с  основной страницей сайта
+- **test**:
+   - `test_ui.py`: тесты пользовательского интерфейса
+   - `test_api.py`: тесты API
+- **.gitignore**: файл, который игнорируется при  Git-контроле
+- **config.py**: конфигурационный файл 
+- **pytest.ini**: конфигурационный файл для фреймворка тестирования pytest
+- **requirements.txt**: файл, который содержит список зависимостей проекта
+- **README.md**: файл с описанием проекта 
 
-### Структура проекта
 
 ### Ссылка на проект и краткое описание 
-- апи- такие то проверки
-- юай тесты такие то проверки
+https://kate-alex.yonote.ru/doc/kursovaya-rabota-3-UlKN4by0ZZ
+....
 
-### Библиотеки
-- pip install pytest
-- 
-
-### Шаги:
-1. Склонировать проект 'git clone https://github.com/KatrinAlex15/Final_project_Chitai_gorod.git'
-2. Установить все зависимости 'pip install -r requirements.txt'
-3. Запустить тесты 'pytest'
-4. Сгенерировать отчет  'allure generate allure-files -o allure-report'
-5. Открыть отчет 'allure open allure-report'
+### Шаги по работе с проектом
+1. Склонировать проект `git clone https://github.com/KatrinAlex15/Final_project_Chitai_gorod.git`
+2. Установить все зависимости `pip install -r requirements.txt`
+3. Получить токен и прописать его в файле `config.py`
+3. Запустить тесты:
+```python
+pytest --alluredir=allure_results # запуск сразу всех тестов;
+pytest tests/test_api.py --alluredir=allure-results # запуск Api тестов;
+pytest tests/test_ui.py --alluredir=allure-results # запуск Ui тестов.
+```
+4. Сгенерировать отчет  `allure generate allure-files -o allure-report`
+5. Открыть отчет `allure open allure-report`
